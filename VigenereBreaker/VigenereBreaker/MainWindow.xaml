@@ -1,0 +1,77 @@
+﻿<Window x:Class="VigenereBreaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VigenereBreaker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="496" Width="1027.5">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Encrypt/Decrypt">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Cipher Text" />
+                        <TextBox Name="CipherTextBox"
+                                 HorizontalAlignment="Left"
+                                 TextWrapping="Wrap"
+                                 VerticalAlignment="Top"
+                                 Width="400"
+                                 Height="400" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="Cipher Key: " />
+                            <TextBox Name="KeyTextBox" Text="KING" Width="100" Height="18" />
+                        </StackPanel>
+                        <Button Content="Encrypt" Margin="5" Width="50" Height="20" Click="Encrypt_Click" />
+                        <Button Content="Decrypt" Margin="5" Width="50" Height="20" Click="Decrypt_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Plain Text" />
+                        <TextBox Name="PlainTextBox"
+                                 Text="thesunandthemaninthemoon"
+                                 HorizontalAlignment="Left"
+                                 TextWrapping="Wrap"
+                                 VerticalAlignment="Top"
+                                 Width="400"
+                                 Height="400" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Cracking Helper">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Cipher Text" />
+                        <TextBox Name="CrackingCipherTextBox"
+                                 HorizontalAlignment="Left"
+                                 TextWrapping="Wrap"
+                                 VerticalAlignment="Top"
+                                 Width="400"
+                                 Height="400" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="Key Length: " />
+                            <TextBox Name="KeyLengthTextBox" Text="4" Width="100" Height="18"
+                                     PreviewTextInput="NumberValidationTextBox" />
+                        </StackPanel>
+                        <Button Content="Analyze" Margin="5" Width="50" Height="20" Click="Analyze_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                Width="400"
+                                Height="400">
+                        <TextBlock Text="Frequency" />
+                        <DataGrid Name="FrequencyTable" >
+                            
+
+                        </DataGrid>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
