@@ -71,6 +71,26 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
+            <TabItem Header="Letter Encryption">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Left">
+                        <TextBlock Text="Plain char" Margin="5"/>
+                        <TextBox Name="PlainLetterTextBox" Margin="5" Width="15"/>
+                        <Button Name="CalculatePlainLetter" Content="Calculate" Click="CalculatePlainLetter_Click" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="Key char" Margin="5" />
+                        <TextBox Name="KeyLetterTextBox" Margin="5" Width="15"/>
+                        <Button Name="CalculateKeyLetter" Content="Calculate" Click="CalculateKeyLetter_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="Cipher char" Margin="5"/>
+                        <TextBox Name="CipherLetterTextBox" Margin="5" Width="15"/>
+                        <Button Name="CalculateCipherLetter" Content="Calculate" Click="CalculateCipherLetter_Click" />
+                    </StackPanel>
+                </StackPanel>
+               </TabItem>
         </TabControl>
 
     </Grid>

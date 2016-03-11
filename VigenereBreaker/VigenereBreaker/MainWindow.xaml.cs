@@ -80,6 +80,33 @@ namespace VigenereBreaker
             c2.Binding = new Binding("Frequency");
             FrequencyTable.Columns.Add(c2);
         }
+
+        private void CalculatePlainLetter_Click(object sender, RoutedEventArgs e)
+        {
+            var vignereEncrypter = new VigenereEncrypter();
+            char cipherLetter = CipherLetterTextBox.Text[0];
+            char keyLetter = KeyLetterTextBox.Text[0];
+            char plainLetter = vignereEncrypter.DecryptChar(keyLetter, cipherLetter);
+            PlainLetterTextBox.Text = plainLetter.ToString();
+        }
+
+        private void CalculateKeyLetter_Click(object sender, RoutedEventArgs e)
+        {
+            var vignereEncrypter = new VigenereEncrypter();
+            char cipherLetter = CipherLetterTextBox.Text[0];
+            char plainLetter = PlainLetterTextBox.Text[0];
+            char keyLetter = vignereEncrypter.CalculateKey(plainLetter, cipherLetter);
+            KeyLetterTextBox.Text = keyLetter.ToString();
+        }
+
+        private void CalculateCipherLetter_Click(object sender, RoutedEventArgs e)
+        {
+            var vignereEncrypter = new VigenereEncrypter();
+            char plainLetter = PlainLetterTextBox.Text[0];
+            char keyLetter = KeyLetterTextBox.Text[0];
+            char cipherLetter = vignereEncrypter.EncryptChar(keyLetter, plainLetter);
+            CipherLetterTextBox.Text = cipherLetter.ToString();
+        }
     }
 
     public class DataGridItem
