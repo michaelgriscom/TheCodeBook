@@ -1,6 +1,9 @@
-﻿using System;
+﻿#region
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VigenereBreaker;
+
+#endregion
 
 namespace VigenereTests
 {

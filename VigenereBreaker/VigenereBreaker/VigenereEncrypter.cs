@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#region
+
+using System;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
+#endregion
 
 namespace VigenereBreaker
 {
@@ -10,12 +12,7 @@ namespace VigenereBreaker
     {
         private const int LETTERS_IN_ALPHABET = 26;
         private const char FIRST_LETTER = 'a';
-        private const char LAST_LETTER = (char)(FIRST_LETTER + LETTERS_IN_ALPHABET);
-
-        public VigenereEncrypter()
-        {
-            
-        }
+        private const char LAST_LETTER = (char) (FIRST_LETTER + LETTERS_IN_ALPHABET);
 
         public string Encrypt(string key, string plainText)
         {
@@ -34,11 +31,13 @@ namespace VigenereBreaker
                 return "Key must have letters.";
             }
             text = text.ToLower();
+            text = Regex.Replace(text, @"\s+", ""); // remove whitespace
             key = key.ToLower();
+
             var encipheredText = new StringBuilder();
             for (int textIndex = 0; textIndex < text.Length; textIndex++)
             {
-                int keyIndex = textIndex % key.Length;
+                int keyIndex = textIndex%key.Length;
                 char keyLetter = key[keyIndex];
                 char plainTextLetter = text[textIndex];
                 char cipherLetter = encrypt(keyLetter, plainTextLetter);
@@ -64,7 +63,7 @@ namespace VigenereBreaker
         {
             int plainTextLetterAlphaIndex = AlphaIndex(plainTextLetter);
             int keyLetterAlphaIndex = AlphaIndex(keyLetter);
-            int cipherLetterIndex = (plainTextLetterAlphaIndex + keyLetterAlphaIndex) % LETTERS_IN_ALPHABET;
+            int cipherLetterIndex = (plainTextLetterAlphaIndex + keyLetterAlphaIndex)%LETTERS_IN_ALPHABET;
             char cipherLetter = CharAtAlphaIndex(cipherLetterIndex);
             return cipherLetter;
         }
@@ -74,7 +73,7 @@ namespace VigenereBreaker
             int keyLetterAlphaIndex = AlphaIndex(keyLetter);
             int cipherLetterAlphaIndex = AlphaIndex(cipherLetter);
             int plainTextLetterAlphaIndex = cipherLetterAlphaIndex - keyLetterAlphaIndex;
-            if(plainTextLetterAlphaIndex < 0)
+            if (plainTextLetterAlphaIndex < 0)
             {
                 plainTextLetterAlphaIndex += LETTERS_IN_ALPHABET;
             }
@@ -99,7 +98,7 @@ namespace VigenereBreaker
             {
                 throw new Exception(string.Format("Index must be {0}-{1}.", firstLetterAlphaIndex, lastLetterAlphaIndex));
             }
-            return (char)(FIRST_LETTER + alphaIndex);
+            return (char) (FIRST_LETTER + alphaIndex);
         }
     }
 }

@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region
+
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+#endregion
 
 namespace VigenereBreaker
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -38,7 +32,11 @@ namespace VigenereBreaker
 
         private void Decrypt_Click(object sender, RoutedEventArgs e)
         {
-
+            string key = KeyTextBox.Text;
+            string cipherText = CipherTextBox.Text;
+            var vignereEncrypter = new VigenereEncrypter();
+            string plainText = vignereEncrypter.Decrypt(key, cipherText);
+            PlainTextBox.Text = plainText.ToUpper();
         }
 
         // taken from http://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
@@ -55,30 +53,56 @@ namespace VigenereBreaker
 
         private void Analyze_Click(object sender, RoutedEventArgs e)
         {
+            FrequencyTable.Items.Clear();
             var textAnalyzer = new TextAnalyzer();
             string cipherText = CrackingCipherTextBox.Text;
             int keyLength = int.Parse(KeyLengthTextBox.Text);
             var frequencies = textAnalyzer.DetermineFrequencies(cipherText, keyLength);
             foreach (var freq in frequencies)
             {
-                DataGridItem dgi = new DataGridItem() {String = freq.Key, Frequency = freq.Value};
-                FrequencyTable.Items.Add(dgi);
+                FrequencyTable.Items.Add(freq);
             }
         }
 
         // taken from http://stackoverflow.com/questions/704724/programatically-add-column-rows-to-wpf-datagrid
         private void MakeColumns()
         {
-            DataGridTextColumn c1 = new DataGridTextColumn();
-            c1.Header = "String";
-            c1.Binding = new Binding("String");
-            c1.Width = 110;
-            FrequencyTable.Columns.Add(c1);
-            DataGridTextColumn c2 = new DataGridTextColumn();
-            c2.Header = "Frequency";
-            c2.Width = 110;
-            c2.Binding = new Binding("Frequency");
-            FrequencyTable.Columns.Add(c2);
+            FrequencyTable.Columns.Add(
+                new DataGridTextColumn
+                {
+                    Header = "KeyIndex",
+                    Binding = new Binding("KeyIndex"),
+                    Width = 110
+                });
+            FrequencyTable.Columns.Add(
+                new DataGridTextColumn
+                {
+                    Header = "String",
+                    Binding = new Binding("String"),
+                    Width = 110
+                });
+            FrequencyTable.Columns.Add(
+                new DataGridTextColumn
+                {
+                    Header = "Frequency",
+                    Binding = new Binding("Frequency"),
+                    Width = 110
+                });
+
+            FrequencyTable.Columns.Add(
+                new DataGridTextColumn
+                {
+                    Header = "ExpectedFrequency",
+                    Binding = new Binding("ExpectedFrequency"),
+                    Width = 110
+                });
+            FrequencyTable.Columns.Add(
+                new DataGridTextColumn
+                {
+                    Header = "Abnormality",
+                    Binding = new Binding("Abnormality"),
+                    Width = 110
+                });
         }
 
         private void CalculatePlainLetter_Click(object sender, RoutedEventArgs e)
@@ -107,11 +131,5 @@ namespace VigenereBreaker
             char cipherLetter = vignereEncrypter.EncryptChar(keyLetter, plainLetter);
             CipherLetterTextBox.Text = cipherLetter.ToString();
         }
-    }
-
-    public class DataGridItem
-    {
-        public string String { get; set; }
-        public int Frequency { get; set; }
     }
 }

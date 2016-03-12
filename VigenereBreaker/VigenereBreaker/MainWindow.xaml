@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VigenereBreaker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="496" Width="1027.5">
+        Title="MainWindow" Height="639.5" Width="1165.5">
     <Grid>
         <TabControl>
             <TabItem Header="Encrypt/Decrypt">
@@ -17,7 +17,7 @@
                                  TextWrapping="Wrap"
                                  VerticalAlignment="Top"
                                  Width="400"
-                                 Height="400" />
+                                 Height="400" AcceptsReturn="True" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
@@ -36,7 +36,7 @@
                                  TextWrapping="Wrap"
                                  VerticalAlignment="Top"
                                  Width="400"
-                                 Height="400" />
+                                 Height="400" AcceptsReturn="True" />
                     </StackPanel>
                 </StackPanel>
             </TabItem>
@@ -49,7 +49,7 @@
                                  TextWrapping="Wrap"
                                  VerticalAlignment="Top"
                                  Width="400"
-                                 Height="400" />
+                                 Height="400" AcceptsReturn="True" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="10" HorizontalAlignment="Center"
                                 VerticalAlignment="Center">
@@ -61,13 +61,9 @@
                         <Button Content="Analyze" Margin="5" Width="50" Height="20" Click="Analyze_Click" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
-                                Width="400"
-                                Height="400">
+                                Width="536" Margin="0,18,0,0">
                         <TextBlock Text="Frequency" />
-                        <DataGrid Name="FrequencyTable" >
-                            
-
-                        </DataGrid>
+                        <DataGrid Name="FrequencyTable" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" Height="551" Margin="0,0,10,0" />
                     </StackPanel>
                 </StackPanel>
             </TabItem>
@@ -90,7 +86,7 @@
                         <Button Name="CalculateCipherLetter" Content="Calculate" Click="CalculateCipherLetter_Click" />
                     </StackPanel>
                 </StackPanel>
-               </TabItem>
+            </TabItem>
         </TabControl>
 
     </Grid>
